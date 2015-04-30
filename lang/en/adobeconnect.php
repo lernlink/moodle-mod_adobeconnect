@@ -79,6 +79,7 @@ $string['usermapping_desc'] = 'Select the mapping type between Moodle user data 
 $string['usermapping_opt_username'] = 'username';
 $string['usermapping_opt_email'] = 'email';
 $string['usermapping_opt_bracesname'] = '{username}';
+$string['usermapping_opt_klcuuid'] = 'KLC: {uuid} or email';
 
 $string['adobeconnect:meetingpresenter'] = 'Meeting Presenter';
 $string['adobeconnect:meetingparticipant'] = 'Meeting Particpant';

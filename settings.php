@@ -44,7 +44,8 @@ if ($ADMIN->fulltree) {
     $usermapping_options = array(
       ADOBE_USERMAPPING_USERNAME    => get_string('usermapping_opt_username', 'adobeconnect'),
       ADOBE_USERMAPPING_EMAIL       => get_string('usermapping_opt_email', 'adobeconnect'),
-      ADOBE_USERMAPPING_BRACESNAME  => get_string('usermapping_opt_bracesname', 'adobeconnect'));
+      ADOBE_USERMAPPING_BRACESNAME  => get_string('usermapping_opt_bracesname', 'adobeconnect'),
+      ADOBE_USERMAPPING_KLCUUID     => get_string('usermapping_opt_klcuuid', 'adobeconnect'));
     // compatible default if the former checkbox 'adobeconnect_email_login' was selected
     $usermapping_default = ADOBE_USERMAPPING_USERNAME;
     if ( isset($CFG->adobeconnect_email_login) and !empty($CFG->adobeconnect_email_login) ) {
