@@ -10,4 +10,4 @@ $plugin->requires  = 2014101000;
 $plugin->cron      = 0;
 $plugin->component = 'mod_adobeconnect';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '2.8.0.0';
+$plugin->release   = '3.1.0.0';
