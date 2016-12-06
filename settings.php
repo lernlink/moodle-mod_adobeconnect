@@ -47,11 +47,24 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext('adobeconnect_admin_httpauth', get_string('admin_httpauth', 'adobeconnect'),
                        get_string('admin_httpauth_desc', 'adobeconnect'), 'my-user-id', PARAM_TEXT));
 
-    $settings->add(new admin_setting_configcheckbox('adobeconnect_email_login', get_string('email_login', 'adobeconnect'),
-                       get_string('email_login_desc', 'adobeconnect'), '0'));
+    $usermapping_options = array(
+      ADOBE_USERMAPPING_USERNAME    => get_string('usermapping_opt_username', 'adobeconnect'),
+      ADOBE_USERMAPPING_EMAIL       => get_string('usermapping_opt_email', 'adobeconnect'),
+      ADOBE_USERMAPPING_BRACESNAME  => get_string('usermapping_opt_bracesname', 'adobeconnect'),
+      ADOBE_USERMAPPING_KLCUUID     => get_string('usermapping_opt_klcuuid', 'adobeconnect'));
+    // compatible default if the former checkbox 'adobeconnect_email_login' was selected
+    $usermapping_default = ADOBE_USERMAPPING_USERNAME;
+    if ( isset($CFG->adobeconnect_email_login) and !empty($CFG->adobeconnect_email_login) ) {
+      $usermapping_default = ADOBE_USERMAPPING_EMAIL;
+    }
+    $settings->add(new admin_setting_configselect('adobeconnect_usermapping',
+        get_string('usermapping', 'adobeconnect'), get_string('usermapping_desc', 'adobeconnect'),
+        $usermapping_default, $usermapping_options));
+
 
     $settings->add(new admin_setting_configcheckbox('adobeconnect_https', get_string('https', 'adobeconnect'),
                        get_string('https_desc', 'adobeconnect'), '0'));
+
 
 
     $url = $CFG->wwwroot . '/mod/adobeconnect/conntest.php';

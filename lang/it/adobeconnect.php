@@ -78,6 +78,12 @@ $string['connectiontesttitle'] = 'Test Connessione Adobe Connect';
 $string['conntestintro'] = '<p>Saranno condotti una serie di test al fine di verificare la corretta impostazione del modulo e per determinare se le credenziali fornite hanno diritti sufficienti sul server Adobe connect per garantire il funzionamento della attivita. Se uno dei test dovesse fallire, si rende necessario operare per risolverli, o altrimenti il modulo non funzioner&agrave;a</p><p> Per ulteriori informazioni e assistenza su come impostare il server Adobe Connect Pro, &egrave; possibile consultare le pagine presenti su Moodledocs per questo modulo <a href="{$a->url}">Help page</a></p>';
 $string['greaterstarttime'] = 'L\'orario di inizio non puo essere maggiore di quello di fine';
 $string['invalidadobemeeturl'] = 'Il valore inserito non e corretto.  Per maggiori informazioni potete selezionare il pulsante di help relativo a questo campo';
+$string['usermapping'] = '[IT] Moodle to Adobe Connect username mapping';
+$string['usermapping_desc'] = '[IT] Select the mapping type between Moodle usernames and Adobe Connect usernames to provide compatibility with other software. Changing this may result in duplicated usernames in Adobe Connect as missing users are automatically created.';
+$string['usermapping_opt_username'] = '[IT] username';
+$string['usermapping_opt_email'] = '[IT] email';
+$string['usermapping_opt_bracesname'] = '[IT] {username}';
+$string['usermapping_opt_klcuuid'] = '[IT] KLC: {uuid} or email';
 
 $string['adobeconnect:meetingpresenter'] = 'Relatore';
 $string['adobeconnect:meetingparticipant'] = 'Partecipante';

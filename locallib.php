@@ -43,6 +43,12 @@ define('ADOBE_MEETPERM_PRIVATE', 2); // means the meeting is private, and only r
 
 define('ADOBE_TMZ_LENGTH', 6);
 
+// Used for mapping Moodle user data with Adobe Connect usernames
+define('ADOBE_USERMAPPING_USERNAME',    '0'); // Usernames are kept as is
+define('ADOBE_USERMAPPING_EMAIL',       '1'); // Moodle email is used as AC username
+define('ADOBE_USERMAPPING_BRACESNAME',  '2'); // Usernames are enclosed in curly braces
+define('ADOBE_USERMAPPING_KLCUUID',     '3'); // Usernames are either UUIDs or email, depending on format
+
 function adobe_connection_test($host = '', $port = 80, $username = '',
                                $password = '', $httpheader = '',
                                $emaillogin, $https = false) {
@@ -1372,11 +1378,32 @@ function adobeconnect_get_assignable_roles($context, $rolenamedisplay = ROLENAME
 function set_username($username, $email) {
     global $CFG;
 
-    if (isset($CFG->adobeconnect_email_login) and !empty($CFG->adobeconnect_email_login)) {
-        return $email;
-    } else {
-        return $username;
+    // default to standard username mapping
+    $mapping = ADOBE_USERMAPPING_USERNAME;
+    if ( isset($CFG->adobeconnect_usermapping) && !empty($CFG->adobeconnect_usermapping) ) {
+        $mapping = $CFG->adobeconnect_usermapping;
     }
+
+    switch ($mapping) {
+        case ADOBE_USERMAPPING_EMAIL:
+            return $email;
+        case ADOBE_USERMAPPING_BRACESNAME:
+            return '{'.$username.'}';
+        case ADOBE_USERMAPPING_KLCUUID:
+            // Mapping for KLC:
+            //  - Use usernames if they look like UUIDs (Moodle will not allow braces, so add these and ensure uppercase)
+            //  - If username isn't in UUID format, use their email (staff).
+            // Sample UUID(8-4-4-4-12): '6f9a75ed-15a5-47bb-9b35-90b73af967a3'
+            $uuid_pattern = '/^[0-9A-Za-z]{8}\-([0-9A-Za-z]{4}\-){3}[0-9A-Za-z]{12}$/';
+            if ( preg_match($uuid_pattern, $username) === 1 ) {
+                return '{'.strtoupper($username).'}';
+            }
+            return $email;
+        case ADOBE_USERMAPPING_USERNAME:
+        default:
+            return $username;
+    }
+
 }
 
 /**
